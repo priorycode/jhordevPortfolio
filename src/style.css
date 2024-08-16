@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+:root {
+    --font-principal: "Titillium Web", sans-serif;
+    --color-white: #ffffff;
+    --color-principal: #111a20;
+    --color-green: #82f9a1;
+    --color-h2: #ecf8ff;
+    --color-yellow: #FAFE43;
+    --color-descripcion: rgba(255, 255, 255, 0.6);
+    --color-green-o: rgba(130, 249, 161, 0.6);
+    --color-black: #000;
+
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+
+}
+
+@media screen and (min-width: 800px) {
+    html {
+        transform: scale(1.10);
+        transform-origin: 0 0;
+        width: 91%;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    animation: fade-in 1s ease-in-out;
+    font-family: var(--font-principal);
+    font-size: 1.6rem;
+    line-height: 1.8;
+    background-color: var(--color-principal);
+    color: #fff;
+}
+
+.loaded {
+    opacity: 1;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 76.9rem;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1000px) {
+    .contenedor {
+        width: 95%;
+    }
+}
+
+p {
+    color: var(--color-white);
+    font-size: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-white);
+}
+
+img,
+picture {
+    width: 100%;
+    display: block;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-principal);
+    margin: 5rem;
+    font-weight: 300;
+    text-align: center;
+    color: var(--color-white);
+}
+
+h1 {
+    font-size: 3.8rem;
+}
+
+h2 {
+    font-size: 3.4rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+h4 {
+    font-size: 2.6rem;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

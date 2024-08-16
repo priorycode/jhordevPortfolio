@@ -81,7 +81,7 @@ import pdfUrl from "@/assets/CV - Jhordy Mondragon Saucedo.pdf";
               >Proyectos</router-link
             >
           </li>
-          <li>
+          <li hidden>
             <router-link @click="toggleNavbar" to="/articles" class="link"
               >Artículos</router-link
             >

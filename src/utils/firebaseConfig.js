@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBpKuq3tGK-a4ZJzvNKEfnQBq46mnz7yAk",
@@ -12,6 +17,11 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-export {db};
+// Configurar la persistencia de sesión
+setPersistence(auth, browserLocalPersistence).catch((error) => {
+  console.error("Error al configurar la persistencia:", error);
+});
 
+export { db, auth };

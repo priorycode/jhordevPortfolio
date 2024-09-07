@@ -1,10 +1,22 @@
 <script setup>
-import Header from "./components/Header.vue";
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import Header from './components/Header.vue';
+
+const route = useRoute();
+const showHeader = ref(true);
+
+watch(route, (newRoute) => {
+  // Actualiza `showHeader` según la nueva ruta
+  showHeader.value = !newRoute.path.startsWith('/admin/');
+});
 </script>
 
 <template>
-  <Header />
+  <!-- Mostrar el Header solo si `showHeader` es verdadero -->
+  <Header v-if="showHeader" />
   <div id="app" class="contenedor">
+    <!-- Contenedor principal para el contenido de la vista -->
     <router-view />
   </div>
 </template>

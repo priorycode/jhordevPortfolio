@@ -56,12 +56,12 @@ import Heroimg from "../assets/hero.png";
         <div class="cover"></div>
         <img :src="Heroimg" alt="Imagen de Jhordev" />
         <div class="nav__social">
-          <a href="https://www.facebook.com/jhordyMSaucedo" target="_blank">
+          <a href="https://www.facebook.com/jhordymondra/" target="_blank">
             <Facebook
               class="size-[30px] md:size-[20px] hover:scale-[1.25] transition-all duration-500 ease-in-out hover:stroke-color-green"
             />
           </a>
-          <a href="https://www.instagram.com/jhordev.pe/" target="_blank"
+          <a href="https://www.instagram.com/jhordev.ing/" target="_blank"
             ><Instagram
               class="size-[30px] md:size-[20px] hover:scale-[1.25] transition-all duration-500 ease-in-out hover:stroke-color-green"
           /></a>

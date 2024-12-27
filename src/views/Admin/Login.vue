@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { Eye, EyeOff, ChevronRight, Loader } from "lucide-vue-next";
 import imgLogo from "@/assets/jd_sinfondo.svg";
 import { auth } from "@/utils/firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 const router = useRouter();
 const showPassword = ref(false);
@@ -14,6 +14,7 @@ const errorMessage = ref("");
 const isSubmitting = ref(false);
 const showFieldError = ref(false);
 const showChevron = ref(true);
+const recoveryMessage = ref("");
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -50,6 +51,23 @@ const handleSubmit = async (e) => {
     isSubmitting.value = false;
   }
 };
+
+const handlePasswordReset = async () => {
+  if (!email.value) {
+    recoveryMessage.value = "Por favor, ingresa tu email para recuperar la contraseña.";
+    setTimeout(() => (recoveryMessage.value = ""), 3000);
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email.value);
+    recoveryMessage.value = "Correo de recuperación enviado.";
+  } catch (error) {
+    recoveryMessage.value = "Error al enviar el correo de recuperación.";
+  }
+
+  setTimeout(() => (recoveryMessage.value = ""), 3000);
+};
 </script>
 
 <template>
@@ -67,71 +85,77 @@ const handleSubmit = async (e) => {
       </div>
       <form @submit="handleSubmit" class="mt-[24px] flex flex-col gap-[17px]">
         <div
-          class="flex flex-col gap-[2px] bg-color-gray-f5 py-[9px] px-[15px] rounded-[8px]"
+            class="flex flex-col gap-[2px] bg-color-gray-f5 py-[9px] px-[15px] rounded-[8px]"
         >
           <label for="user" class="text-color-gray-61 text-size-10 font-medium"
-            >Email</label
+          >Email</label
           >
           <input
-            v-model="email"
-            type="email"
-            class="text-color-black text-size-16 border-none bg-color-gray-f5 focus:outline-none focus:ring-0 p-0"
-            placeholder="pedropicapiedra@gmail.com"
+              v-model="email"
+              type="email"
+              class="text-color-black text-size-16 border-none bg-color-gray-f5 focus:outline-none focus:ring-0 p-0"
+              placeholder="pedropicapiedra@gmail.com"
           />
         </div>
         <div
-          class="relative flex flex-col gap-[2px] bg-color-gray-f5 py-[9px] px-[15px] rounded-[8px]"
+            class="relative flex flex-col gap-[2px] bg-color-gray-f5 py-[9px] px-[15px] rounded-[8px]"
         >
           <label
-            for="password"
-            class="text-color-gray-61 text-size-10 font-medium"
-            >Password</label
+              for="password"
+              class="text-color-gray-61 text-size-10 font-medium"
+          >Password</label
           >
           <input
-            v-model="password"
-            :type="showPassword ? 'text' : 'password'"
-            class="text-color-black text-size-16 border-none bg-color-gray-f5 focus:outline-none focus:ring-0 p-0"
-            placeholder="♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦"
+              v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              class="text-color-black text-size-16 border-none bg-color-gray-f5 focus:outline-none focus:ring-0 p-0"
+              placeholder="♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦ ♦"
           />
           <button
-            type="button"
-            class="absolute right-[15px] top-[23px] text-color-gray-61"
-            @click="showPassword = !showPassword"
+              type="button"
+              class="absolute right-[15px] top-[23px] text-color-gray-61"
+              @click="showPassword = !showPassword"
           >
             <component
-              :is="showPassword ? Eye : EyeOff"
-              class="w-[16px] h-[16px]"
+                :is="showPassword ? Eye : EyeOff"
+                class="w-[16px] h-[16px]"
             />
           </button>
         </div>
+        <a class="w-full text-end cursor-pointer" @click.prevent="handlePasswordReset"
+        >¿Olvidaste tu contraseña?</a
+        >
+        <div v-if="recoveryMessage" class="text-center text-size-14 text-color-green mt-2">
+          {{ recoveryMessage }}
+        </div>
         <button
-          type="submit"
-          :disabled="isSubmitting"
-          :class="{
+            type="submit"
+            :disabled="isSubmitting"
+            :class="{
             'bg-color-green':
               !errorMessage.value ||
               errorMessage.value !== 'Cuenta no existente',
             'bg-red-500': errorMessage.value === 'Cuenta no existente',
           }"
-          class="uppercase text-color-black font-bold rounded-[8px] hover:bg-color-green-os transition-colors duration-500 ease-in-out"
+            class="uppercase text-color-black font-bold rounded-[8px] hover:bg-color-green-os transition-colors duration-500 ease-in-out"
         >
           <span
-            v-if="isSubmitting"
-            class="flex items-center justify-center gap-[15.5px] py-[15.5px] rounded-[8px]"
+              v-if="isSubmitting"
+              class="flex items-center justify-center gap-[15.5px] py-[15.5px] rounded-[8px]"
           >
             <Loader class="animate-spin w-5 h-5 mr-2" />
             Autenticando...
           </span>
           <span v-else-if="showFieldError">
             <div
-              class="bg-red-400 text-white flex items-center justify-center gap-[15.5px] py-[15.5px] rounded-[8px]"
+                class="bg-red-400 text-white flex items-center justify-center gap-[15.5px] py-[15.5px] rounded-[8px]"
             >
               Llena todos los campos
             </div>
           </span>
           <span
-            v-else
-            class="flex items-center justify-center gap-[15.5px] py-[15.5px]"
+              v-else
+              class="flex items-center justify-center gap-[15.5px] py-[15.5px]"
           >
             {{ errorMessage || "Continuar" }}
             <ChevronRight v-if="showChevron" />
@@ -141,6 +165,7 @@ const handleSubmit = async (e) => {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 /* Agrega cualquier estilo adicional aquí */

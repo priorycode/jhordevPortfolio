@@ -2,6 +2,7 @@
 import { useRouter } from "vue-router";
 import { auth } from "@/utils/firebaseConfig";
 import { signOut } from "firebase/auth";
+import SideBar from "@/components/Admin/SideBar.vue";
 
 const router = useRouter();
 
@@ -16,14 +17,11 @@ const handleLogout = async () => {
 </script>
 
 <template>
-  <div class="h-[90vh] w-full flex flex-col items-center justify-center">
-    <h1>Desde principal admin</h1>
-    <button
-      @click="handleLogout"
-      class="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition-colors"
-    >
-      Cerrar sesión
-    </button>
+  <div class="h-screen grid grid-cols-10">
+    <SideBar class="col-span-2" />
+    <main class="col-span-8 p-20">
+      <RouterView/>
+    </main>
   </div>
 </template>
 

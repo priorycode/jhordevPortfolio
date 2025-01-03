@@ -6,11 +6,13 @@ import Skill from "../components/Skill.vue";
 import Footer from "../components/Footer.vue";
 </script>
 <template>
-  <main>
+
+  <main class="contenedor">
     <Hero />
     <Project/>
     <Skill/>
+    <Footer/>
   </main>
-  <Footer/>
+
 </template>
 <style scoped></style>

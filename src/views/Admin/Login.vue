@@ -33,7 +33,7 @@ const handleSubmit = async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email.value, password.value);
-    router.replace("/admin/principal");
+    router.replace("/admin");
   } catch (error) {
     if (error.code === "auth/wrong-password") {
       errorMessage.value = "Credenciales incorrectas";

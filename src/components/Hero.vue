@@ -43,7 +43,7 @@ import Heroimg from "../assets/hero.png";
     <div class="hero__info">
       <h1>
         Soy Jhordev,<span> Diseñador</span> y
-        <span> Desarrollador</span> Frontend
+        <span> Desarrollador</span> Web
       </h1>
       <p>
         ¡Bienvenido al mundo Jhordev! Aquí encontrarás mi galería de proyectos,

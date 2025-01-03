@@ -10,7 +10,7 @@ const showHeader = ref(true);
 
 watch(route, (newRoute) => {
   // Actualiza `showHeader` según la nueva ruta
-  showHeader.value = !newRoute.path.startsWith('/admin/');
+  showHeader.value = !newRoute.path.startsWith('/admin')  && !newRoute.path.startsWith('/login');
 });
 </script>
 
@@ -18,8 +18,8 @@ watch(route, (newRoute) => {
   <Analytics />
   <SpeedInsights />
   <!-- Mostrar el Header solo si `showHeader` es verdadero -->
-  <Header v-if="showHeader" />
-  <div id="app" class="contenedor">
+  <Header v-if="showHeader" class="contenedor" />
+  <div id="app" >
     <!-- Contenedor principal para el contenido de la vista -->
     <router-view />
   </div>

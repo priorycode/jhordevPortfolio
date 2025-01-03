@@ -3,6 +3,7 @@ import Form from "@/components/Contact/Form.vue";
 import Footer from "@/components/Footer.vue";
 </script>
 <template>
+  <main class="contenedor">
   <div class="mt-[30px] md:mt-[60px]">
     <h1
       class="text-[#ecf8ff] text-[35px] md:text-[48px] font-semibold leading-normal text-center md:text-start"
@@ -19,4 +20,5 @@ import Footer from "@/components/Footer.vue";
   </div>
   <Form />
   <Footer />
+  </main>
 </template>

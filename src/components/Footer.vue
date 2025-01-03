@@ -7,7 +7,7 @@ const currentYear = new Date().getFullYear();
 const router = useRouter();
 
 const handleDoubleClick = () => {
-  router.push("/admin/login");
+  router.push("/login");
 };
 </script>
 

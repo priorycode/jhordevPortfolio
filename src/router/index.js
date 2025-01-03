@@ -12,6 +12,8 @@ import projects_design from "../components/Projects/projects_design.vue";
 import projects_landing from "../components/Projects/projects_landing.vue";
 import Login from "../views/Admin/Login.vue";
 import Principal from "../views/Admin/Principal.vue";
+import ProjectAdmin from "@/components/Admin/ProjectAdmin.vue";
+import ContactoAdmin from "@/components/Admin/ContactoAdmin.vue";
 
 const routes = [
   {
@@ -66,15 +68,26 @@ const routes = [
     component: Resumen,
   },
   {
-    path: "/admin/login",
+    path: "/login",
     name: "login",
     component: Login,
   },
   {
-    path: "/admin/principal",
-    name: "principal",
+    path: "/admin",
     component: Principal,
     meta: { requiresAuth: true },
+    children: [
+      {
+        path: "",
+        name: "principal",
+        component: ProjectAdmin,
+      },
+      {
+        path: "contactadmin",
+        name: "contactadmin",
+        component: ContactoAdmin,
+      }
+    ]
   },
   {
     path: "/:catchAll(.*)",

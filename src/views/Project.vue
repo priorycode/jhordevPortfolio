@@ -3,7 +3,8 @@ import Footer from "../components/Footer.vue";
 </script>
 
 <template>
-  <section class="mt-[30px] md:mt-[60px]">
+  <main class="contenedor">
+  <section class="mt-[30px] md:mt-[60px] ">
     <h1 class="text-[#ecf8ff] text-center md:text-start text-[35px] md:text-[48px] font-semibold leading-normal">
       Proyectos Dev
     </h1>
@@ -43,6 +44,7 @@ import Footer from "../components/Footer.vue";
 
   <router-view></router-view>
   <Footer />
+  </main>
 </template>
 
 <style scoped>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+Desde admin
 </template>
 
 <style scoped>
